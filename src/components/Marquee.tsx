@@ -22,14 +22,14 @@ const Marquee = async () => {
 
             <span className="text-gray-700">{h.today} টাকা/কেজি</span>
 
-            {h.change.dir === "up" ? (
-              <span className="flex items-center text-[#1A9951] font-semibold gap-0.5">
-                <FaCaretDown className="text-base" />
+            {h.change.dir === "down" ? (
+              <span className="flex  text-[#D03739] font-semibold gap-0.5">
+                <FaCaretUp className="text-base" />
                 <span>{h.change.pct}</span>
               </span>
             ) : (
-              <span className="flex  text-[#D03739] font-semibold gap-0.5">
-                <FaCaretUp className="text-base" />
+              <span className="flex items-center text-[#1A9951] font-semibold gap-0.5">
+                <FaCaretDown className="text-base" />
                 <span>{h.change.pct}</span>
               </span>
             )}

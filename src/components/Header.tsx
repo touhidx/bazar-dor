@@ -12,7 +12,7 @@ const Header = () => {
             <Image height={30} width={30} src="/logo-icon.png" alt="logo" />
           </div>
           <div>
-            <h2>Bangla News 24</h2>
+            <h2 className="text-lg font-bold">বাজার দর</h2>
             <p>{date}</p>
           </div>
         </div>
