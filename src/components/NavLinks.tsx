@@ -1,5 +1,6 @@
 import Link from "next/link";
-interface l {
+
+interface Category {
   id: string;
   slug: string;
   nameBn: string;
@@ -11,14 +12,15 @@ const NavLinks = async () => {
     "https://api.api-store.workers.dev/api/bazardor/categories",
   );
   const data = await res.json();
+
   return (
     <>
-      <nav className="flex gap-3 container mx-auto p-1.5">
-        {data.map((l: l) => (
+      <nav className="container mx-auto flex gap-3 overflow-x-auto whitespace-nowrap px-4 py-1.5 text-sm sm:px-6 sm:text-base md:flex-wrap md:overflow-visible lg:px-8">
+        {data.map((l: Category) => (
           <Link
             key={l.id}
             href={`/${l.slug}`}
-            className="flex items-center gap-1 hover:underline"
+            className="flex shrink-0 items-center gap-1"
           >
             <span className="text-base" aria-hidden="true">
               {l.icon}
@@ -27,7 +29,7 @@ const NavLinks = async () => {
           </Link>
         ))}
       </nav>
-      <hr className="text-gray-200" />
+      <hr className="border-gray-200" />
     </>
   );
 };
