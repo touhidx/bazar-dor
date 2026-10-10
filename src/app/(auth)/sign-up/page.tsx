@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-// import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 import {
   Button,
   FieldError,
@@ -14,7 +13,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-import { signUp, signIn } from "@/lib/auth-client";
+import { signIn, signUp } from "@/lib/auth-client";
 
 const inputClass =
   "w-full rounded-lg border border-gray-200 bg-[#f8faf7] px-3 py-2.5 text-sm " +
@@ -24,9 +23,6 @@ const labelClass = "mb-1.5 block text-sm font-medium text-gray-900";
 
 const SignUpPage = () => {
   const router = useRouter();
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -40,26 +36,38 @@ const SignUpPage = () => {
       return;
     }
 
-    setLoading(true);
     const { error } = await signUp.email({
       name: data.name,
       email: data.email,
       password: data.password,
+      callbackURL: "/",
     });
-    setLoading(false);
-
     if (error) {
-      toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
-      return;
+      toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
+    } else {
+      toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
+      router.push("/sign-in"); // সরাসরি হোম পেজে রিডাইরেক্ট করবে
+      router.refresh();
     }
-
-    toast.success("অ্যাকাউন্ট তৈরি হয়েছে! এখন সাইন ইন করুন");
-    router.push("/signin");
+  };
+  const handleGoogleSignIn = async () => {
+    const { error } = await signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+    if (error) {
+      toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
+    }
   };
 
-  const handleSocial = async (provider: "google" | "github") => {
-    const { error } = await signIn.social({ provider, callbackURL: "/" });
-    if (error) toast.error(error.message || "লগইন করা যায়নি");
+  const handleGithubSignIn = async () => {
+    const { error } = await signIn.social({
+      provider: "github",
+      callbackURL: "/",
+    });
+    if (error) {
+      toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
+    }
   };
 
   return (
@@ -71,7 +79,7 @@ const SignUpPage = () => {
       </p>
 
       {/* Card */}
-      <div className="w-full max-w-[280px] rounded-2xl border border-gray-200 bg-[#f9fbf8] p-4 shadow-sm sm:max-w-sm sm:p-5">
+      <div className="w-full max-w-70 rounded-2xl border border-gray-200 bg-[#f9fbf8] p-4 shadow-sm sm:max-w-sm sm:p-5">
         <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
           {/* Name */}
           <TextField
@@ -107,8 +115,6 @@ const SignUpPage = () => {
             isRequired
             name="password"
             type="password"
-            value={password}
-            onChange={setPassword}
             validate={(v: string) =>
               v.length < 8 ? "পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে" : null
             }
@@ -118,15 +124,8 @@ const SignUpPage = () => {
             <FieldError className="mt-1 text-xs text-red-600" />
           </TextField>
 
-          {/* Confirm password */}
-          <TextField
-            isRequired
-            name="confirmPassword"
-            type="password"
-            validate={(v: string) =>
-              v !== password ? "পাসওয়ার্ড দুটি মিলছে না" : null
-            }
-          >
+          {/* Confirm password (match is checked inside onSubmit) */}
+          <TextField isRequired name="confirmPassword" type="password">
             <Label className={labelClass}>পাসওয়ার্ড নিশ্চিত করুন</Label>
             <Input className={inputClass} placeholder="আবার লিখুন" />
             <FieldError className="mt-1 text-xs text-red-600" />
@@ -135,10 +134,9 @@ const SignUpPage = () => {
           {/* Submit */}
           <Button
             type="submit"
-            isDisabled={loading}
-            className="w-full rounded-lg bg-green-700 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-green-800 disabled:opacity-60"
+            className="w-full rounded-lg bg-green-700 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-green-800"
           >
-            {loading ? "অপেক্ষা করুন..." : "অ্যাকাউন্ট তৈরি করুন"}
+            অ্যাকাউন্ট তৈরি করুন
           </Button>
         </Form>
 
@@ -152,14 +150,14 @@ const SignUpPage = () => {
         {/* Social buttons */}
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Button
-            onPress={() => handleSocial("google")}
+            onPress={() => handleGoogleSignIn()}
             className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-semibold text-gray-900 hover:bg-gray-50"
           >
             <FcGoogle size={16} />
             Google দিয়ে চালিয়ে যান
           </Button>
           <Button
-            onPress={() => handleSocial("github")}
+            onPress={() => handleGithubSignIn()}
             className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-semibold text-gray-900 hover:bg-gray-50"
           >
             <FaGithub size={16} />

@@ -3,9 +3,7 @@ import "react-marquee-text/dist/styles.css";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
 
 const Marquee = async () => {
-  const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products",
-  );
+  const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
   const data = await res.json();
   return (
     <div>

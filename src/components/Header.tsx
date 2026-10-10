@@ -1,6 +1,7 @@
 import Image from "next/image";
 import NavLinks from "./NavLinks";
 import Marquee from "./Marquee";
+import Link from "next/link";
 
 const Header = () => {
   const date = new Date().toLocaleDateString("bn-BD", { dateStyle: "full" });
@@ -19,8 +20,12 @@ const Header = () => {
         </div>
 
         <div>
-          <button className="btn border-none bg-white">সাইন আপ</button>
-          <button className=" btn bg-[#05893E] text-white">সাইন ইন</button>
+          <Link href="/sign-up">
+            <button className="btn border-none bg-white">সাইন আপ</button>
+          </Link>
+          <Link href="/sign-in">
+            <button className=" btn bg-[#05893E] text-white">সাইন ইন</button>
+          </Link>
         </div>
       </div>
       <hr className="text-gray-200" />
