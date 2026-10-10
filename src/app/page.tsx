@@ -1,6 +1,6 @@
 import Banner from "@/components/Banner";
 import Marquee from "@/components/Marquee";
-import Products from "@/components/Products";
+import Products from "@/app/Products/Products";
 
 export default function Home() {
   return (

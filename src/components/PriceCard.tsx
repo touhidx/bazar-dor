@@ -15,7 +15,9 @@ const toBn = (n, decimals = 0) =>
   new Intl.NumberFormat("bn-BD", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
-  }).format(n);
+  })
+    .format(n)
+    .toString();
 
 const BADGE = {
   up: { style: "text-red-600 bg-red-50", arrow: "▲" }, // price rose = bad

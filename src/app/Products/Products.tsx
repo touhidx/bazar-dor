@@ -1,5 +1,5 @@
 import PriceCard from "@/components/PriceCard";
-import { getProducts, Product } from "./lib/Product";
+import { getProducts, Product } from "../../components/lib/Product";
 
 // 1 → 2 → 3 columns
 const GRID = "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3";
