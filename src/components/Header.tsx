@@ -1,32 +1,41 @@
 import Image from "next/image";
+
 import NavLinks from "./NavLinks";
 import Marquee from "./Marquee";
 import Link from "next/link";
 
-const Header = () => {
-  const date = new Date().toLocaleDateString("bn-BD", { dateStyle: "full" });
+import ProfileSection from "./ProfileSection";
 
+const date = new Date().toLocaleDateString("bn-BD", { dateStyle: "full" });
+const Header = () => {
   return (
     <header className="">
-      <div className="container mx-auto flex items-center justify-between pt-3 pb-2">
-        <div className="flex items-center gap-3">
-          <div className=" bg-[#05893E] p-3 rounded-xl">
-            <Image height={30} width={30} src="/logo-icon.png" alt="logo" />
-          </div>
-          <div>
-            <h2 className="text-lg font-bold">বাজার দর</h2>
-            <p>{date}</p>
+      <div className="container mx-auto flex items-center justify-between gap-2 px-4 pt-3 pb-2">
+        {/* Logo + date */}
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+          <Link href="/">
+            <div className="rounded-xl bg-[#05893E] p-2 sm:p-3">
+              <Image
+                height={30}
+                width={30}
+                src="/logo-icon.png"
+                alt="logo"
+                className="h-5 w-5 sm:h-[30px] sm:w-[30px]"
+              />
+            </div>
+          </Link>
+          <div className="min-w-0">
+            <Link href="/">
+              <h2 className="text-base font-bold sm:text-lg">বাজার দর</h2>
+            </Link>
+            <p className="truncate text-[11px] text-gray-500 sm:text-sm">
+              {date}
+            </p>
           </div>
         </div>
 
-        <div>
-          <Link href="/sign-up">
-            <button className="btn border-none bg-white">সাইন আপ</button>
-          </Link>
-          <Link href="/sign-in">
-            <button className=" btn bg-[#05893E] text-white">সাইন ইন</button>
-          </Link>
-        </div>
+        {/* Right side */}
+        <ProfileSection />
       </div>
       <hr className="text-gray-200" />
       <NavLinks />

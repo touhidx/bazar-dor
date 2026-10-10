@@ -39,7 +39,7 @@ const SignInPage = () => {
       callbackURL: "/",
     });
     if (error) {
-      toast.error(error.message || "সাইন ইন করা যায়নি");
+      toast.error("সাইন ইন করা যায়নি");
     }
   };
 
@@ -49,22 +49,19 @@ const SignInPage = () => {
       callbackURL: "/",
     });
     if (error) {
-      toast.error(error.message || "সাইন ইন করা যায়নি");
+      toast.error("সাইন ইন করা যায়নি");
     }
   };
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-[#eef3ec] px-4 py-10">
-      {/* Heading */}
       <h1 className="text-2xl font-bold text-gray-900">সাইন ইন</h1>
       <p className="mt-1 mb-6 max-w-sm text-center text-xs text-gray-500">
         বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
       </p>
 
-      {/* Card */}
       <div className="w-full max-w-sm rounded-2xl border border-gray-200 bg-[#f9fbf8] p-4 shadow-sm sm:p-5">
         <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
-          {/* Email */}
           <TextField
             isRequired
             name="email"
@@ -80,7 +77,6 @@ const SignInPage = () => {
             <FieldError className="mt-1 text-xs text-red-600" />
           </TextField>
 
-          {/* Password */}
           <TextField
             isRequired
             name="password"
@@ -94,7 +90,6 @@ const SignInPage = () => {
             <FieldError className="mt-1 text-xs text-red-600" />
           </TextField>
 
-          {/* Submit */}
           <Button
             type="submit"
             className="w-full rounded-lg bg-green-700 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-green-800"
@@ -103,14 +98,12 @@ const SignInPage = () => {
           </Button>
         </Form>
 
-        {/* Divider */}
         <div className="my-4 flex items-center gap-3">
           <span className="h-px flex-1 bg-gray-200" />
           <span className="text-xs text-gray-500">অথবা</span>
           <span className="h-px flex-1 bg-gray-200" />
         </div>
 
-        {/* Social buttons */}
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Button
             onPress={() => handleGoogleSignIn()}
@@ -128,7 +121,6 @@ const SignInPage = () => {
           </Button>
         </div>
 
-        {/* Switch to sign up */}
         <p className="mt-4 text-center text-xs text-gray-900">
           অ্যাকাউন্ট নেই?{" "}
           <Link
@@ -140,7 +132,6 @@ const SignInPage = () => {
         </p>
       </div>
 
-      {/* Back home */}
       <Link href="/" className="mt-6 text-xs text-gray-500 hover:text-gray-700">
         ← হোম পেজে ফিরে যান
       </Link>

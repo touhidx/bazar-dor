@@ -46,7 +46,7 @@ const SignUpPage = () => {
       toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
     } else {
       toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!");
-      router.push("/sign-in"); // সরাসরি হোম পেজে রিডাইরেক্ট করবে
+      router.push("/sign-in");
       router.refresh();
     }
   };
@@ -56,7 +56,7 @@ const SignUpPage = () => {
       callbackURL: "/",
     });
     if (error) {
-      toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
+      toast.error("অ্যাকাউন্ট তৈরি করা যায়নি");
     }
   };
 
@@ -66,22 +66,19 @@ const SignUpPage = () => {
       callbackURL: "/",
     });
     if (error) {
-      toast.error(error.message || "অ্যাকাউন্ট তৈরি করা যায়নি");
+      toast.error("অ্যাকাউন্ট তৈরি করা যায়নি");
     }
   };
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-[#eef3ec] px-4 py-10">
-      {/* Heading */}
       <h1 className="text-2xl font-bold text-gray-900">অ্যাকাউন্ট তৈরি করুন</h1>
       <p className="mt-1 mb-6 text-center text-xs text-gray-500">
         বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।
       </p>
 
-      {/* Card */}
       <div className="w-full max-w-70 rounded-2xl border border-gray-200 bg-[#f9fbf8] p-4 shadow-sm sm:max-w-sm sm:p-5">
         <Form className="flex flex-col gap-4" onSubmit={onSubmit}>
-          {/* Name */}
           <TextField
             isRequired
             name="name"
@@ -94,7 +91,6 @@ const SignUpPage = () => {
             <FieldError className="mt-1 text-xs text-red-600" />
           </TextField>
 
-          {/* Email */}
           <TextField
             isRequired
             name="email"
@@ -110,7 +106,6 @@ const SignUpPage = () => {
             <FieldError className="mt-1 text-xs text-red-600" />
           </TextField>
 
-          {/* Password */}
           <TextField
             isRequired
             name="password"
@@ -124,7 +119,6 @@ const SignUpPage = () => {
             <FieldError className="mt-1 text-xs text-red-600" />
           </TextField>
 
-          {/* Confirm password (match is checked inside onSubmit) */}
           <TextField isRequired name="confirmPassword" type="password">
             <Label className={labelClass}>পাসওয়ার্ড নিশ্চিত করুন</Label>
             <Input className={inputClass} placeholder="আবার লিখুন" />
@@ -140,14 +134,12 @@ const SignUpPage = () => {
           </Button>
         </Form>
 
-        {/* Divider */}
         <div className="my-4 flex items-center gap-3">
           <span className="h-px flex-1 bg-gray-200" />
           <span className="text-xs text-gray-500">অথবা</span>
           <span className="h-px flex-1 bg-gray-200" />
         </div>
 
-        {/* Social buttons */}
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Button
             onPress={() => handleGoogleSignIn()}
@@ -165,7 +157,6 @@ const SignUpPage = () => {
           </Button>
         </div>
 
-        {/* Switch to sign in */}
         <p className="mt-4 text-center text-xs text-gray-900">
           অ্যাকাউন্ট আছে?{" "}
           <Link
@@ -177,7 +168,6 @@ const SignUpPage = () => {
         </p>
       </div>
 
-      {/* Back home */}
       <Link href="/" className="mt-6 text-xs text-gray-500 hover:text-gray-700">
         ← হোম পেজে ফিরে যান
       </Link>
