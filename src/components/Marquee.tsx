@@ -20,17 +20,19 @@ const Marquee = async () => {
               <span>{h.nameBn}</span>
             </span>
 
-            <span className="text-gray-700">{h.today} টাকা/কেজি</span>
+            <span className="text-gray-700">
+              {h.today.toLocaleString("bn-BD")} টাকা/কেজি
+            </span>
 
             {h.change.dir === "down" ? (
               <span className="flex  text-[#D03739] font-semibold gap-0.5">
                 <FaCaretUp className="text-base" />
-                <span>{h.change.pct}</span>
+                <span>{h.change.pct.toLocaleString("bn-BD")} %</span>
               </span>
             ) : (
               <span className="flex items-center text-[#1A9951] font-semibold gap-0.5">
                 <FaCaretDown className="text-base" />
-                <span>{h.change.pct}</span>
+                <span>{h.change.pct.toLocaleString("bn-BD")} %</span>
               </span>
             )}
           </div>
