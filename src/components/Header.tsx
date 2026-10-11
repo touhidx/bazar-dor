@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-import NavLinks from "./NavLinks";
 import Marquee from "./Marquee";
 import Link from "next/link";
 
 import ProfileSection from "./ProfileSection";
+import NavLinks from "@/app/categories/page";
 
 const date = new Date().toLocaleDateString("bn-BD", { dateStyle: "full" });
 const Header = () => {
@@ -34,7 +34,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Right side */}
         <ProfileSection />
       </div>
       <hr className="text-gray-200" />

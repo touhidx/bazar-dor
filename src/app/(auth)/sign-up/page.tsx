@@ -13,7 +13,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-import { signIn, signUp } from "@/lib/auth-client";
+import { authClient, signIn, signUp } from "@/lib/auth-client";
 
 const inputClass =
   "w-full rounded-lg border border-gray-200 bg-[#f8faf7] px-3 py-2.5 text-sm " +
@@ -51,7 +51,7 @@ const SignUpPage = () => {
     }
   };
   const handleGoogleSignIn = async () => {
-    const { error } = await signIn.social({
+    const { error } = await authClient.signUp.social({
       provider: "google",
       callbackURL: "/",
     });
@@ -61,7 +61,7 @@ const SignUpPage = () => {
   };
 
   const handleGithubSignIn = async () => {
-    const { error } = await signIn.social({
+    const { error } = await authClient.signIn.social({
       provider: "github",
       callbackURL: "/",
     });

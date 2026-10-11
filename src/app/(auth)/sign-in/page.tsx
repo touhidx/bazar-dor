@@ -13,7 +13,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-import { signIn } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 
 const inputClass =
   "w-full rounded-lg border border-gray-200 bg-[#f8faf7] px-3 py-2.5 text-sm " +
@@ -34,7 +34,7 @@ const SignInPage = () => {
     if (error) toast.error("সাইন ইন করা যায়নি");
   };
   const handleGoogleSignIn = async () => {
-    const { error } = await signIn.social({
+    const { error } = await authClient.signIn.social({
       provider: "google",
       callbackURL: "/",
     });
@@ -44,7 +44,7 @@ const SignInPage = () => {
   };
 
   const handleGithubSignIn = async () => {
-    const { error } = await signIn.social({
+    const { error } = await authClient.signIn.social({
       provider: "github",
       callbackURL: "/",
     });
@@ -106,14 +106,14 @@ const SignInPage = () => {
 
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Button
-            onPress={() => handleGoogleSignIn()}
+            onClick={() => handleGoogleSignIn()}
             className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-semibold text-gray-900 hover:bg-gray-50"
           >
             <FcGoogle size={16} />
             Google দিয়ে চালিয়ে যান
           </Button>
           <Button
-            onPress={() => handleGithubSignIn()}
+            onClick={() => handleGithubSignIn()}
             className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-2 py-2 text-xs font-semibold text-gray-900 hover:bg-gray-50"
           >
             <FaGithub size={16} />

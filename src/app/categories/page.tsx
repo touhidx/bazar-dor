@@ -20,7 +20,7 @@ const NavLinks = async () => {
         {data.map((l: Category) => (
           <Link
             key={l.id}
-            href={`/${l.slug}`}
+            href={`/categories/${l.slug}`}
             className="flex shrink-0 items-center gap-1"
           >
             <span className="text-base" aria-hidden="true">
