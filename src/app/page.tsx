@@ -1,6 +1,6 @@
 import Banner from "@/components/Banner";
 
-import Products from "@/app/Products/Products";
+import Products from "@/app/products/Products";
 
 export default function Home() {
   return (
