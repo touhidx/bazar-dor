@@ -1,4 +1,5 @@
 import PriceCard from "@/components/PriceCard";
+import SortSelect from "@/components/SortSelect";
 
 const API = "https://openapi.programming-hero.com/api/bazardor";
 
@@ -10,10 +11,13 @@ async function getJson(path: string) {
 
 const ProductCategoryPage = async ({
   params,
+  searchParams,
 }: {
   params: Promise<{ categoryId: string }>;
+  searchParams: Promise<{ sort?: string }>;
 }) => {
   const { categoryId } = await params;
+  const { sort } = await searchParams;
   const slug = decodeURIComponent(categoryId);
 
   const [products, categories] = await Promise.all([
@@ -21,9 +25,13 @@ const ProductCategoryPage = async ({
     getJson("categories"),
   ]);
 
-  // flat product list -> filter by category slug
   const filtered = products.filter((p: any) => p.category === slug);
   const category = categories.find((c: any) => c.slug === slug);
+
+  // copy first: .sort() mutates, so never sort the original array
+  const sorted = [...filtered];
+  if (sort === "asc") sorted.sort((a, b) => Number(a.today) - Number(b.today));
+  if (sort === "desc") sorted.sort((a, b) => Number(b.today) - Number(a.today));
 
   return (
     <div className="bg-base-300">
@@ -36,29 +44,28 @@ const ProductCategoryPage = async ({
               {category?.nameBn ?? "ক্যাটাগরি"}
             </h1>
             <p className="text-sm text-gray-500">
-              {filtered.length}টি পণ্যের আজকের দাম ও পরিবর্তন
+              {filtered.length.toLocaleString("bn-BD")}টি পণ্যের আজকের দাম ও
+              পরিবর্তন
             </p>
           </div>
         </div>
 
-        {/* Sort bar (UI only for now) */}
+        {/* Sort bar */}
         <div className="flex items-center justify-end gap-2 rounded-2xl border border-gray-200 bg-white p-4 text-sm text-gray-600">
           সাজান
-          <select className="rounded-lg border border-gray-300 px-3 py-1.5">
-            <option>ডিফল্ট</option>
-          </select>
+          <SortSelect />
         </div>
 
         <p className="text-sm text-gray-600">
-          মোট {filtered.length}টি পণ্য দেখানো হচ্ছে
+          মোট {filtered.length.toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে
         </p>
 
         {/* Cards */}
-        {filtered.length === 0 ? (
+        {sorted.length === 0 ? (
           <p className="text-gray-500">কোনো পণ্য পাওয়া যায়নি।</p>
         ) : (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((product: any) => (
+            {sorted.map((product: any) => (
               <PriceCard key={product.slug} product={product} />
             ))}
           </div>
