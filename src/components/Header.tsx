@@ -20,7 +20,7 @@ const Header = () => {
                 width={30}
                 src="/logo-icon.png"
                 alt="logo"
-                className="h-5 w-5 sm:h-[30px] sm:w-[30px]"
+                className="h-5 w-5 sm:h-7.5 sm:w-7.5"
               />
             </div>
           </Link>

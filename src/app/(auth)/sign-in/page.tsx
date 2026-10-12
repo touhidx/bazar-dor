@@ -25,12 +25,16 @@ const SignInPage = () => {
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
+
+    const email = String(formData.get("email") ?? "");
+    const password = String(formData.get("password") ?? "");
+
     const { error } = await signIn.email({
-      email: data.email,
-      password: data.password,
+      email,
+      password,
       callbackURL: "/",
     });
+
     if (error) toast.error("সাইন ইন করা যায়নি");
   };
   const handleGoogleSignIn = async () => {

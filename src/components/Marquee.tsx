@@ -1,12 +1,13 @@
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
+import { Product } from "@/components/lib/Product"; // adjust to your real path
 
 const Marquee = async () => {
   const res = await fetch(
     "https://openapi.programming-hero.com/api/bazardor/products",
   );
-  const data = await res.json();
+  const data: Product[] = await res.json();
   return (
     <div>
       <MarqueeText direction="right" duration={10}>

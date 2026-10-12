@@ -51,7 +51,7 @@ const SignUpPage = () => {
     }
   };
   const handleGoogleSignIn = async () => {
-    const { error } = await authClient.signUp.social({
+    const { error } = await authClient.signIn.social({
       provider: "google",
       callbackURL: "/",
     });

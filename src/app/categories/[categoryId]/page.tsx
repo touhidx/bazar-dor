@@ -1,9 +1,17 @@
 import PriceCard from "@/components/PriceCard";
 import SortSelect from "@/components/SortSelect";
+import { Product } from "@/components/lib/Product"; // adjust to your real path
+
+type Category = {
+  slug: string;
+  nameBn: string;
+  icon: string;
+};
 
 const API = "https://openapi.programming-hero.com/api/bazardor";
 
-async function getJson(path: string) {
+// Generic helper: the caller says what type it expects back
+async function getJson<T>(path: string): Promise<T> {
   const res = await fetch(`${API}/${path}`, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch ${path}`);
   return res.json();
@@ -21,14 +29,13 @@ const ProductCategoryPage = async ({
   const slug = decodeURIComponent(categoryId);
 
   const [products, categories] = await Promise.all([
-    getJson("products"),
-    getJson("categories"),
+    getJson<Product[]>("products"),
+    getJson<Category[]>("categories"),
   ]);
 
-  const filtered = products.filter((p: any) => p.category === slug);
-  const category = categories.find((c: any) => c.slug === slug);
+  const filtered = products.filter((p) => p.category === slug);
+  const category = categories.find((c) => c.slug === slug);
 
-  // copy first: .sort() mutates, so never sort the original array
   const sorted = [...filtered];
   if (sort === "asc") sorted.sort((a, b) => Number(a.today) - Number(b.today));
   if (sort === "desc") sorted.sort((a, b) => Number(b.today) - Number(a.today));
@@ -65,7 +72,7 @@ const ProductCategoryPage = async ({
           <p className="text-gray-500">কোনো পণ্য পাওয়া যায়নি।</p>
         ) : (
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {sorted.map((product: any) => (
+            {sorted.map((product: Product) => (
               <PriceCard key={product.slug} product={product} />
             ))}
           </div>

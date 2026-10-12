@@ -69,8 +69,7 @@ const ProductDetailsPage = async ({
   const product = await getProduct(decodeURIComponent(productId));
   if (!product) notFound();
 
-  const { nameBn, categoryNameBn, unit, image, today, yesterday, change } =
-    product;
+  const { nameBn, unit, image, today, yesterday, change } = product;
   const unitBn = UNIT_BN[unit] ?? unit;
   const ch = CHANGE[change?.dir] ?? CHANGE.flat;
   const diff = Math.abs(today - yesterday);
@@ -152,7 +151,7 @@ const ProductDetailsPage = async ({
           </h2>
 
           <div className="overflow-x-auto rounded-xl border border-gray-200">
-            <table className="w-full min-w-[600px] text-sm">
+            <table className="w-full min-w-150 text-sm">
               <thead>
                 <tr className="text-gray-500">
                   <th className="px-4 py-3 text-left font-medium">বাজার</th>

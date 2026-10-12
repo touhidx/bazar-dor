@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Product } from "./lib/Product";
 
-const UNIT_BN = {
+const UNIT_BN: Record<string, string> = {
   kg: "প্রতি কেজি",
   dozen: "প্রতি ডজন",
   piece: "প্রতি পিস",
@@ -10,8 +10,7 @@ const UNIT_BN = {
   hali: "প্রতি হালি",
 };
 
-// 1290 -> "১,২৯০", 2.1 -> "২.১"
-const toBn = (n, decimals = 0) =>
+const toBn = (n: number, decimals = 0) =>
   new Intl.NumberFormat("bn-BD", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
@@ -19,9 +18,11 @@ const toBn = (n, decimals = 0) =>
     .format(n)
     .toString();
 
-const BADGE = {
-  up: { style: "text-red-600 bg-red-50", arrow: "▲" }, // price rose = bad
-  down: { style: "text-green-600 bg-green-50", arrow: "▼" }, // price fell = good
+type Dir = "up" | "down" | "same";
+
+const BADGE: Record<Dir, { style: string; arrow: string }> = {
+  up: { style: "text-red-600 bg-red-50", arrow: "▲" },
+  down: { style: "text-green-600 bg-green-50", arrow: "▼" },
   same: { style: "text-gray-600 bg-gray-100", arrow: "–" },
 };
 

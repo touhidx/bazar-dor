@@ -1,13 +1,13 @@
 "use client";
 
-import { signOut, useSession } from "@/lib/auth-client";
+import { authClient, signOut } from "@/lib/auth-client";
 
 import Link from "next/link";
 import React from "react";
 import { FiLogOut, FiUser } from "react-icons/fi";
 
 const ProfileSection = () => {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const user = session?.user;
 
   return (
