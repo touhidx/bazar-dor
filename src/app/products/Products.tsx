@@ -1,11 +1,11 @@
 import PriceCard from "@/components/PriceCard";
-import { getProducts, Product } from "../../components/lib/Product";
+import { getProducts } from "../../components/lib/Product";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
 
 // 1 → 2 → 3 columns
 const GRID = "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3";
 
-export default async function Products({ items }: { items: Product[] }) {
+export default async function Products() {
   const products = await getProducts();
 
   const up = products.filter((p) => p.change?.dir === "up").slice(0, 6);
