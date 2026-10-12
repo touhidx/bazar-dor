@@ -7,7 +7,7 @@ export default function Home() {
     <div>
       <Banner />
 
-      <main className="mx-auto container px-4 pb-12">
+      <main className="mx-auto container px-4 pb-12" id="allproducts">
         <Products />
       </main>
     </div>

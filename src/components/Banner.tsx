@@ -22,9 +22,11 @@ const Banner = () => {
             বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
           </p>
 
-          <button className="btn font-semibold border-none bg-[#047F39] text-white hover:bg-[#036a30] btn-sm sm:btn-md">
-            সব পণ্য দেখুন
-          </button>
+          <a href="#allproducts">
+            <button className="btn font-semibold border-none bg-[#047F39] text-white hover:bg-[#036a30] btn-sm sm:btn-md">
+              সব পণ্য দেখুন
+            </button>
+          </a>
         </div>
 
         {/* Image side */}

@@ -54,6 +54,9 @@ async function getProduct(param: string): Promise<ProductDetail | null> {
   const res = await fetch(`${API}/products`, { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch products");
   const all: ProductDetail[] = await res.json();
+  if (!all) {
+    notFound();
+  }
   return all.find((p) => p.slug === param) ?? null;
 }
 

@@ -77,10 +77,10 @@ const ProfilePage = () => {
                 src={user.image}
                 alt={user.name}
                 referrerPolicy="no-referrer"
-                className="h-16 w-16 shrink-0 rounded-xl object-cover sm:h-[68px] sm:w-[68px]"
+                className="h-16 w-16 shrink-0 rounded-xl object-cover sm:h-17 sm:w-17"
               />
             ) : (
-              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-[#05893E] text-2xl font-semibold text-white sm:h-[68px] sm:w-[68px]">
+              <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-[#05893E] text-2xl font-semibold text-white sm:h-17 sm:w-17">
                 {user?.name?.charAt(0).toUpperCase()}
               </span>
             )}

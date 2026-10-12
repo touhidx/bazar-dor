@@ -1,25 +1,11 @@
 import PriceCard from "@/components/PriceCard";
 import { getProducts, Product } from "../../components/lib/Product";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa6";
 
 // 1 → 2 → 3 columns
 const GRID = "grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3";
 
-function Section({ title, items }: { title: string; items: Product[] }) {
-  if (!items.length) return null;
-
-  return (
-    <section className="mt-8">
-      <h2 className="mb-3 text-lg font-bold">{title}</h2>
-      <div className={GRID}>
-        {items.map((p) => (
-          <PriceCard key={p.id} product={p} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default async function Products() {
+export default async function Products({ items }: { items: Product[] }) {
   const products = await getProducts();
 
   const up = products.filter((p) => p.change?.dir === "up").slice(0, 6);
@@ -27,9 +13,43 @@ export default async function Products() {
 
   return (
     <>
-      <Section title="আজ দাম বেড়েছে" items={up} />
-      <Section title="আজ দাম কমেছে" items={down} />
-      <Section title="সব পণ্য" items={products} />
+      <section className="mt-8">
+        <h2 className="mb-3 flex gap-1 items-center text-lg font-bold">
+          <span className="  text-[#D03739] font-semibold gap-0.5">
+            <FaCaretUp className="text-base" />
+          </span>
+          <span>আজ দাম বেড়েছে</span>
+        </h2>
+        <div className={GRID}>
+          {up.map((p) => (
+            <PriceCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
+      <section className="mt-8">
+        <h2 className="mb-3 flex gap-1 items-center text-lg font-bold">
+          <span className="  text-[#1A9951] font-semibold gap-0.5">
+            <FaCaretDown className="text-base" />
+          </span>
+          <span>আজ দাম কমেছে</span>
+        </h2>
+        <div className={GRID}>
+          {down.map((p) => (
+            <PriceCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
+      <section className="mt-8">
+        <h2 className="mb-3  gap-1 text-lg font-bold">সব পণ্য</h2>
+        <p className="mb-2 text-base-content text-sm">
+          মোট {products.length.toLocaleString("bn-BD")} পণ্য দেখানো হচ্ছে
+        </p>
+        <div className={GRID}>
+          {products.map((p) => (
+            <PriceCard key={p.id} product={p} />
+          ))}
+        </div>
+      </section>
     </>
   );
 }

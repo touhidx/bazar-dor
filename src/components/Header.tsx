@@ -9,7 +9,7 @@ import NavLinks from "@/app/categories/page";
 const date = new Date().toLocaleDateString("bn-BD", { dateStyle: "full" });
 const Header = () => {
   return (
-    <header className="">
+    <header className="bg-base-100">
       <div className="container mx-auto flex items-center justify-between gap-2 px-4 pt-3 pb-2">
         {/* Logo + date */}
         <div className="flex min-w-0 items-center gap-2 sm:gap-3">

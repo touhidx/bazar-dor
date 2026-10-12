@@ -1,6 +1,7 @@
 import PriceCard from "@/components/PriceCard";
 import SortSelect from "@/components/SortSelect";
 import { Product } from "@/components/lib/Product"; // adjust to your real path
+import { notFound } from "next/navigation";
 
 type Category = {
   slug: string;
@@ -14,7 +15,11 @@ const API = "https://openapi.programming-hero.com/api/bazardor";
 async function getJson<T>(path: string): Promise<T> {
   const res = await fetch(`${API}/${path}`, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to fetch ${path}`);
-  return res.json();
+  const data = res.json();
+  if (!data) {
+    notFound();
+  }
+  return data;
 }
 
 const ProductCategoryPage = async ({

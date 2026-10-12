@@ -3,12 +3,29 @@
 import { authClient, signOut } from "@/lib/auth-client";
 
 import Link from "next/link";
-import React from "react";
+
 import { FiLogOut, FiUser } from "react-icons/fi";
+import toast from "react-hot-toast";
 
 const ProfileSection = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
+
+  const handleSignOut = async () => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
+    const { error } = await signOut();
+
+    if (error) {
+      toast.error("সাইন আউট করা যায়নি");
+      return;
+    }
+
+    toast.success("সাইন আউট হয়েছে");
+    window.location.assign("/sign-in");
+  };
 
   return (
     <div className="shrink-0">
@@ -33,7 +50,7 @@ const ProfileSection = () => {
                 {user.name?.charAt(0).toUpperCase()}
               </span>
             )}
-            <span className="hidden max-w-[120px] truncate text-sm font-medium text-gray-900 sm:inline">
+            <span className="hidden max-w-30 truncate text-sm font-medium text-gray-900 sm:inline">
               {user.name}
             </span>
             <span className="text-[10px] text-gray-500">▾</span>
@@ -58,7 +75,7 @@ const ProfileSection = () => {
               </Link>
 
               <button
-                onClick={() => signOut()}
+                onClick={handleSignOut}
                 type="button"
                 className="flex cursor-pointer items-center gap-2 text-sm text-red-600 hover:text-red-700"
               >

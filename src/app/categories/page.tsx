@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface Category {
   id: string;
@@ -13,6 +14,9 @@ const NavLinks = async () => {
   );
 
   const data = await res.json();
+  if (!data) {
+    notFound();
+  }
 
   return (
     <>
