@@ -15,7 +15,7 @@ const Marquee = async () => {
   }
   return (
     <div>
-      <MarqueeText direction="right" duration={10}>
+      <MarqueeText direction="right" duration={20}>
         {data.map((h) => (
           <div
             key={h.id}
