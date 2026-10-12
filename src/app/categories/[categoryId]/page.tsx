@@ -46,7 +46,7 @@ const ProductCategoryPage = async ({
   if (sort === "desc") sorted.sort((a, b) => Number(b.today) - Number(a.today));
 
   return (
-    <div className="bg-base-300">
+    <div className="bg-base-300 min-h-screen">
       <div className="mx-auto container space-y-4 p-4">
         {/* Header card */}
         <div className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white p-5">
