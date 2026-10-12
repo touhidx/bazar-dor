@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 বাজার দর (BazarDor)
 
-## Getting Started
+বাজার দর — প্রয়োজনীয় পণ্যের দাম এক নজরে।
 
-First, run the development server:
+BazarDor is a responsive web app that lets users track daily market prices of essential products in Bangladesh, including price changes, category filters, and market-wise price details.
+
+**Live Demo:** [bazar-dor-touhidx.vercel.app](https://bazar-dor-touhidx.vercel.app)
+
+## ✨ Features
+
+- 📱 **Fully responsive**: works smoothly on mobile, tablet, and desktop
+- 📈 **Price ticker**: infinite scrolling marquee showing live price changes (▲/▼)
+- 🔺 **Top risers & fallers**: see which products went up or down today
+- 🗂️ **Category pages with sorting**: sort by default, price low to high, or high to low (handles Bengali numerals)
+- 🔐 **Authentication**: email/password, Google, and GitHub login using BetterAuth
+- 🔒 **product details**: min, max, and average prices across different markets
+- ✏️ **Profile update**: users can update their name from the profile page
+- ⏳ **Skeleton loaders & toasts**: smooth loading states and clear notifications
+- 🚫 **Custom 404 page**: friendly error page with a link back home
+
+## 🛠️ Technologies Used
+
+- [Next.js](https://nextjs.org/) (App Router)
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [DaisyUI](https://daisyui.com/)
+- [BetterAuth](https://better-auth.com/)
+- [react-hot-toast](https://react-hot-toast.com/)
+- TypeScript / JavaScript
+
+## 🚀 Getting Started
 
 ```bash
+# Clone the repository
+git clone https://github.com/your-username/your-repo-name.git
+
+# Go to the project folder
+cd your-repo-name
+
+# Install dependencies
+npm install
+
+# Create a .env file and add your keys
+# BETTER_AUTH_SECRET=
+# BETTER_AUTH_URL=
+# GOOGLE_CLIENT_ID=
+# GOOGLE_CLIENT_SECRET=
+# GITHUB_CLIENT_ID=
+# GITHUB_CLIENT_SECRET=
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📡 API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Data is fetched from the BazarDor API:
 
-## Learn More
+```
+https://openapi.programming-hero.com/api/bazardor
+```
 
-To learn more about Next.js, take a look at the following resources:
+Endpoints: `/products`, `/products/:id`, `/categories`, `/categories/:slug`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is for learning purposes.
